@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Form Validation</title>
+    
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+  </head>
+  <body>
+
+  <form id="form" class="js-form form-container">
+     <h3 class="header">Registration Form</h3>
+         <div class="input-group">
+            <label for="employeeName">Employee Name :</label>
+            <input type="text" name="employeeName" id="employeeName" class="input-field">
+            <i class="fa fa-check-circle" aria-hidden="true"></i>
+            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+            <small class="error" id="nameError"></small>
+
+         </div>
+
+    <br>
+
+
+    <div class="input-group">
+      <label for="gender">Gender :</label>
+      <select id="gender" name="gender" class="select-field">
+        <option value=""selected disabled hidden></option>
+        <option>Male</option>
+        <option>Female</option>
+        <option>Others</option>
+      </select>
+    
+      <div type="error" class="error" id="genderError"></div>
+    </div>
+
+    <br>
+
+
+    <div class="input-group">
+      <label for="department">Department :</label>
+      <select id="department" name="department" class="select-field" >
+        <option value=""selected disabled hidden></option>
+        <option value="Analytics">Analytics</option>
+        <option value="Sales">Sales</option>
+        <option value="Technology">Technology</option>
+        <option value="Marketing">Marketing</option>
+        <option value="Operations">Operations</option>
+      </select>
+     
+      <div type="error" class="error" id="deptError"></div>
+    </div>
+
+    <br>
+
+
+    <div class="input-group">
+      <label for="dateOfJoin">Date of Join :</label>
+      <input type="date" name="dateOfJoin" id="dateOfJoin" class="input-field">
+     
+      <div type="error" class="error" id="dateError"></div>
+    </div>
+
+    <br>
+
+
+    <div class="input-group">
+      <label for="email">Email :</label>
+      <input type="email" placeholder="example@gmail.com" name="email" id="email" class="input-field">
+      <i class="fa fa-check-circle" aria-hidden="true"></i>
+      <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+      <div type="error" class="error" id="emailError"></div>
+    </div>
+
+    <br>
+
+
+    
+
+    <br>
+     <div class="line">
+    <button type="submit" onclick="updateTable()" class="submit">Submit</button>
+    <button type="reset" class="reset">Reset</button>
+     </div>
+
+
+  </form>
+  
+
+
+<table id="table" class="table-container" style="display: none;">
+    
+  <thead>
+    <tr>
+      <th>S.No</th>
+        <th>Employee Name</th>
+        <th>Gender</th>
+        <th>Department</th>
+        <th>Date of Join</th>
+        <th>Email</th>
+    </tr>
+  </thead>
+
+  <tbody id="tbody"></tbody>
+
+    
+</table>
+
+ <script src="valid.js"></script>
+<script>
+
+document.addEventListener('DOMContentLoaded', function () {
+  const array = [];
+   
+ const form = document.getElementById('form');
+
+const table = document.getElementById('table');
+ form.addEventListener('submit', (event)=> {
+ 
+   
+    event.preventDefault();
+
+    const employeeName = document.getElementById("employeeName").value;
+    const gender = document.getElementById("gender").value;
+    const department = document.getElementById("department").value;
+    const dateOfJoin = document.getElementById("dateOfJoin").value;
+    const email = document.getElementById("email").value;
+    
+
+   
+    if (employeeName === '' || gender === '' || department === '' || dateOfJoin === '' || email === '') {
+    
+    return; 
+    }
+array.push(
+  {
+   SNo : array.length+1,
+   employeeName : employeeName,
+   gender : gender,
+   department : department,
+   dateOfJoin : dateOfJoin,
+   email : email
+  }
+   );
+
+updateTable();
+
+table.style.display = "table";
+
+form.reset();
+});
+
+ function updateTable () {
+  
+  const tbody = document.getElementById('tbody');
+  tbody.innerHTML = '';
+
+  array.forEach((data, index) => {
+  const row = document.createElement('tr');
+      row.innerHTML= `
+        <tr>
+          <td>${index+ 1}</td>
+          <td>${data.employeeName}</td>
+          <td>${data.gender}</td>
+          <td>${data.department}</td>
+          <td>${data.dateOfJoin}</td>
+          <td>${data.email}</td>
+        </tr>`;
+        tbody.appendChild(row);
+      });
+    }
+} );
+
+  
+
+
+
+
+</script>
+  </body>
+</html>
