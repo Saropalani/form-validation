@@ -172,4 +172,14 @@ table, th, td {
   background-color: lightgrey;
 }
  
- 
+.fa-sort {
+  opacity: 0.3;
+  visibility: visible;
+}
+
+.fa-sort-up:active,
+.fa-sort-down:active {
+  opacity: 1;
+  color: black;
+
+}
